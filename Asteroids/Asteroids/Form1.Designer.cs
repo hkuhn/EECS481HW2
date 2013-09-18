@@ -63,6 +63,7 @@ namespace Asteroids
             this.Text = "Asteroids";
             this.Load += new System.EventHandler(this.Asteroids_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Asteroids_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Asteroids_KeyPress);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Asteroids_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.spaceship)).EndInit();
             this.ResumeLayout(false);

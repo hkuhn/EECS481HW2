@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.Windows.Input;
 
 namespace Asteroids
 {
@@ -14,13 +16,15 @@ namespace Asteroids
     {
         
         // class vars
-        private Boolean MoveLeft, MoveRight;
+        private Boolean MoveLeft, MoveRight, Shooting;
 
         public GameplayForm()
         {
             InitializeComponent();
             MoveLeft = false;
             MoveRight = false;
+            Shooting = false;
+            
         }
 
         private void Asteroids_Load(object sender, EventArgs e)
@@ -58,10 +62,6 @@ namespace Asteroids
                     MoveRight = false;
                 }
             }
-            if (e.KeyCode == Keys.Space)
-            {
-                // shoot laser
-            }
 
             // Evaluate Movements
             Asteroids_Evaluate();
@@ -80,6 +80,7 @@ namespace Asteroids
                 // move right
                 this.spaceship.Location = new Point(this.spaceship.Left + 5, this.spaceship.Top);
             }
+            
         }
 
         private void Asteroids_KeyUp(object sender, KeyEventArgs e)
@@ -97,15 +98,27 @@ namespace Asteroids
                 // move right
                 MoveRight = false;
             }
-
             if (e.KeyCode == Keys.Space)
             {
-                // shoot laser
+                // resume shooting
+                Shooting = false;
             }
 
             // Evaluate Movements
             Asteroids_Evaluate();
         }
+
+        private void Asteroids_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ' ' && !Shooting)
+            {
+                // shoot
+                Debug.WriteLine("SHOOT!");
+                Shooting = true;
+            }
+        }
+
+
 
     }
 }
