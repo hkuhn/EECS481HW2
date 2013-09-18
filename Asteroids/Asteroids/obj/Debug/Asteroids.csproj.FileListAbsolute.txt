@@ -1,0 +1,9 @@
+\\engin-labs.m.storage.umich.edu\hkuhn\windat.v2\Desktop\GitHub\EECS481HW2\Asteroids\Asteroids\bin\Debug\Asteroids.exe.config
+\\engin-labs.m.storage.umich.edu\hkuhn\windat.v2\Desktop\GitHub\EECS481HW2\Asteroids\Asteroids\bin\Debug\Asteroids.exe
+\\engin-labs.m.storage.umich.edu\hkuhn\windat.v2\Desktop\GitHub\EECS481HW2\Asteroids\Asteroids\bin\Debug\Asteroids.pdb
+\\engin-labs.m.storage.umich.edu\hkuhn\windat.v2\Desktop\GitHub\EECS481HW2\Asteroids\Asteroids\obj\Debug\Asteroids.csprojResolveAssemblyReference.cache
+\\engin-labs.m.storage.umich.edu\hkuhn\windat.v2\Desktop\GitHub\EECS481HW2\Asteroids\Asteroids\obj\Debug\Asteroids.GameplayForm.resources
+\\engin-labs.m.storage.umich.edu\hkuhn\windat.v2\Desktop\GitHub\EECS481HW2\Asteroids\Asteroids\obj\Debug\Asteroids.Properties.Resources.resources
+\\engin-labs.m.storage.umich.edu\hkuhn\windat.v2\Desktop\GitHub\EECS481HW2\Asteroids\Asteroids\obj\Debug\Asteroids.csproj.GenerateResource.Cache
+\\engin-labs.m.storage.umich.edu\hkuhn\windat.v2\Desktop\GitHub\EECS481HW2\Asteroids\Asteroids\obj\Debug\Asteroids.exe
+\\engin-labs.m.storage.umich.edu\hkuhn\windat.v2\Desktop\GitHub\EECS481HW2\Asteroids\Asteroids\obj\Debug\Asteroids.pdb
