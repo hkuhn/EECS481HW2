@@ -12,11 +12,26 @@ using System.Windows.Input;
 
 namespace Asteroids
 {
+
+    public struct Shot
+    {
+        public Graphics graphic;
+        public int x;
+        public int y;
+    }
+
     public partial class GameplayForm : Form
     {
         
         // class vars
         private Boolean MoveLeft, MoveRight, Shooting;
+        private static int ship_speed = 7;
+        private static int laser_speed = 12;
+        private static int laser_size = 7;
+        private Timer laser_timer = new Timer();
+
+        // laser queue
+        private List<Shot> laser_list;
 
         public GameplayForm()
         {
@@ -24,6 +39,11 @@ namespace Asteroids
             MoveLeft = false;
             MoveRight = false;
             Shooting = false;
+
+            laser_list = new List<Shot>();
+            laser_timer.Interval = 5;
+            laser_timer.Tick += new EventHandler(laser_Tick);
+            laser_timer.Start();
             
         }
 
@@ -73,12 +93,12 @@ namespace Asteroids
             if (MoveLeft)
             {
                 // move left
-                this.spaceship.Location = new Point(this.spaceship.Left - 5, this.spaceship.Top);
+                this.spaceship.Location = new Point(this.spaceship.Left - ship_speed, this.spaceship.Top);
             }
             else if (MoveRight)
             {
                 // move right
-                this.spaceship.Location = new Point(this.spaceship.Left + 5, this.spaceship.Top);
+                this.spaceship.Location = new Point(this.spaceship.Left + ship_speed, this.spaceship.Top);
             }
             
         }
@@ -113,12 +133,40 @@ namespace Asteroids
             if (e.KeyChar == ' ' && !Shooting)
             {
                 // shoot
-                Debug.WriteLine("SHOOT!");
                 Shooting = true;
+                System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.HotPink);
+                System.Drawing.Graphics laser;
+                laser = this.CreateGraphics();
+                laser.FillRectangle(myBrush, new Rectangle(this.spaceship.Location.X + 23, this.spaceship.Location.Y - 15, laser_size, laser_size));
+                myBrush.Dispose();
+                Shot shot = new Shot();
+                shot.graphic = laser;
+                shot.x = this.spaceship.Location.X + 23;
+                shot.y = this.spaceship.Location.Y - 15;
+                laser_list.Add(shot);
             }
         }
 
+        private void laser_Tick(object sender, EventArgs e)
+        {
+            // do stuff on timer
+            for (int i = 0; i < laser_list.Count; i++)
+            {
+                System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.HotPink);
+                System.Drawing.Graphics laser;
+                laser = this.CreateGraphics();
+                laser.FillRectangle(myBrush, new Rectangle(laser_list[i].x, laser_list[i].y - laser_speed, laser_size, laser_size));
+                myBrush.Dispose();
+                Shot s = new Shot();
+                s.graphic = laser;
+                s.x = laser_list[i].x;
+                s.y = laser_list[i].y - laser_speed;
+                laser_list.RemoveAt(i);
+                laser_list.Insert(i, s);
+            }
 
+            this.Invalidate();
+        }
 
     }
 }

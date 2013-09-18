@@ -42,7 +42,10 @@ namespace Asteroids
             // 
             this.spaceship.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.spaceship.Image = ((System.Drawing.Image)(resources.GetObject("spaceship.Image")));
-            this.spaceship.Location = new System.Drawing.Point(334, 700);
+            this.spaceship.Location = new System.Drawing.Point(350, 700);
+            this.spaceship.Margin = new System.Windows.Forms.Padding(0);
+            this.spaceship.MaximumSize = new System.Drawing.Size(50, 50);
+            this.spaceship.MinimumSize = new System.Drawing.Size(50, 50);
             this.spaceship.Name = "spaceship";
             this.spaceship.Size = new System.Drawing.Size(50, 50);
             this.spaceship.TabIndex = 0;
@@ -50,12 +53,13 @@ namespace Asteroids
             // 
             // GameplayForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(784, 762);
+            this.ClientSize = new System.Drawing.Size(782, 755);
             this.Controls.Add(this.spaceship);
             this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(800, 800);
             this.MinimumSize = new System.Drawing.Size(800, 800);
