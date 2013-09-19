@@ -270,6 +270,43 @@ namespace Asteroids
                 asteroid_list.Insert(i, a);
             }
 
+            // detect collisions
+            // cross reference asteroids
+            for (int i = 0; i < asteroid_list.Count; i++)
+            {
+                Asteroid cur_asteroid = asteroid_list[i];
+                // check x, then y
+                for (int j = 0; j < laser_list.Count; j++)
+                {
+                    Shot cur_laser = laser_list[j];
+                    if ((Math.Abs(cur_laser.x - cur_asteroid.x) <= 3) && (Math.Abs(cur_laser.y - cur_asteroid.y) <= (cur_asteroid.size / 2)))
+                    {
+                        // inflict damage to asteroid
+                        Asteroid a = new Asteroid();
+                        a.graphic = asteroid_list[i].graphic;
+                        a.x = asteroid_list[i].x;
+                        a.y = asteroid_list[i].y;
+                        a.speed = asteroid_list[i].speed;
+                        a.type = asteroid_list[i].type;
+                        a.hp = asteroid_list[i].hp - 1;
+                        a.size = asteroid_list[i].size;
+                        asteroid_list.RemoveAt(i);
+                        if (a.hp != 0)
+                        {
+                            asteroid_list.Insert(i, a);
+                        }
+
+                        // remove laser
+                        laser_list.RemoveAt(j);
+                    }
+                }
+            }
+
+
+
+
+
+            // redraw objects
             this.Invalidate();
         }
 
@@ -344,6 +381,8 @@ namespace Asteroids
                 count = count - 1;
             }
         }
+
+
 
     }
 }
