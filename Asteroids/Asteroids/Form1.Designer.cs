@@ -37,6 +37,7 @@ namespace Asteroids
             this.spaceship = new System.Windows.Forms.PictureBox();
             this.score = new System.Windows.Forms.Label();
             this.lives = new System.Windows.Forms.Label();
+            this.countdown_label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.spaceship)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,15 +83,32 @@ namespace Asteroids
             this.lives.Text = "Lives: 5";
             this.lives.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // countdown_label
+            // 
+            this.countdown_label.AutoSize = true;
+            this.countdown_label.BackColor = System.Drawing.Color.Transparent;
+            this.countdown_label.Font = new System.Drawing.Font("Gill Sans Ultra Bold Condensed", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.countdown_label.ForeColor = System.Drawing.Color.White;
+            this.countdown_label.Location = new System.Drawing.Point(234, 154);
+            this.countdown_label.MaximumSize = new System.Drawing.Size(300, 300);
+            this.countdown_label.MinimumSize = new System.Drawing.Size(300, 300);
+            this.countdown_label.Name = "countdown_label";
+            this.countdown_label.Size = new System.Drawing.Size(300, 300);
+            this.countdown_label.TabIndex = 3;
+            this.countdown_label.Text = "10";
+            this.countdown_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // GameplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(784, 762);
+            this.Controls.Add(this.countdown_label);
             this.Controls.Add(this.lives);
             this.Controls.Add(this.score);
             this.Controls.Add(this.spaceship);
+            this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(800, 800);
@@ -112,6 +130,7 @@ namespace Asteroids
         private System.Windows.Forms.PictureBox spaceship;
         private Label score;
         private Label lives;
+        private Label countdown_label;
     }
 }
 

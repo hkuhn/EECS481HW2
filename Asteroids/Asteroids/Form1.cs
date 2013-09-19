@@ -36,7 +36,7 @@ namespace Asteroids
         
         // class vars
         private Boolean MoveLeft, MoveRight, Shooting;
-        private static int ship_speed = 7;
+        private static int ship_speed = 12;
         private static int laser_speed = 12;
         private static int laser_size = 7;
         private static int l1_asteroid_size = 40;
@@ -45,8 +45,13 @@ namespace Asteroids
         private static int l1_asteroid_hp = 10;
         private static int l2_asteroid_hp = 15;
         private static int l3_asteroid_hp = 20;
+        private static int level_decrement = 500; // 0.5 sec
+        private static int level_limit = 3000; // 3 sec
         private Timer movement_timer = new Timer();
         private Timer spawn_timer = new Timer();
+        private Timer level_timer = new Timer();
+        private Timer countdown_timer = new Timer();
+        private int count = 9; // init countdown
 
         private static Random rnd = new Random();
 
@@ -69,10 +74,28 @@ namespace Asteroids
             movement_timer.Start();
             // asteroid timer init
             asteroid_list = new List<Asteroid>();
-            spawn_timer.Interval = 2000;
+            spawn_timer.Interval = 9500;
             spawn_timer.Tick += new EventHandler(spawn_Tick);
             spawn_timer.Enabled = true;
             spawn_timer.Start();
+            // level timer init
+            level_timer.Interval = 10000; // 10 sec
+            level_timer.Tick += new EventHandler(level_Tick);
+            level_timer.Enabled = true;
+            level_timer.Start();
+            // countdown timer init
+            countdown_timer.Interval = 1000; // 1 sec
+            countdown_timer.Tick += new EventHandler(countdown_Tick);
+            countdown_timer.Enabled = true;
+            countdown_timer.Start();
+
+
+            // paint and buffer
+            this.SetStyle(
+            ControlStyles.UserPaint |
+            ControlStyles.AllPaintingInWmPaint |
+            ControlStyles.DoubleBuffer, true);
+            this.Paint += new PaintEventHandler(Asteroids_Paint);
             
         }
 
@@ -176,27 +199,22 @@ namespace Asteroids
             }
         }
 
-        private void movement_Tick(object sender, EventArgs e)
+        private void Asteroids_Paint(object sender, PaintEventArgs e)
         {
-            // laser movement
             for (int i = 0; i < laser_list.Count; i++)
             {
+                // redraw lasers
                 System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.HotPink);
                 System.Drawing.Graphics laser;
                 laser = this.CreateGraphics();
                 laser.FillRectangle(myBrush, new Rectangle(laser_list[i].x, laser_list[i].y - laser_speed, laser_size, laser_size));
                 myBrush.Dispose();
-                Shot s = new Shot();
-                s.graphic = laser;
-                s.x = laser_list[i].x;
-                s.y = laser_list[i].y - laser_speed;
-                laser_list.RemoveAt(i);
-                laser_list.Insert(i, s);
+                laser.Dispose();
             }
 
-            // asteroid movement
             for (int i = 0; i < asteroid_list.Count; i++)
             {
+                // redraw asteroids
                 System.Drawing.SolidBrush myBrush;
                 int hp = asteroid_list[i].hp;
                 if (hp < 6)
@@ -219,10 +237,31 @@ namespace Asteroids
                 asteroid = this.CreateGraphics();
                 asteroid.FillRectangle(myBrush, new Rectangle(asteroid_list[i].x, asteroid_list[i].y + asteroid_list[i].speed, asteroid_list[i].size, asteroid_list[i].size));
                 myBrush.Dispose();
+                asteroid.Dispose();
+            }
+        }
+
+        private void movement_Tick(object sender, EventArgs e)
+        {
+            // laser movement
+            for (int i = 0; i < laser_list.Count; i++)
+            {
+                Shot s = new Shot();
+                s.graphic = laser_list[i].graphic;
+                s.x = laser_list[i].x;
+                s.y = laser_list[i].y - laser_speed;
+                laser_list.RemoveAt(i);
+                laser_list.Insert(i, s);
+                
+            }
+
+            // asteroid movement
+            for (int i = 0; i < asteroid_list.Count; i++)
+            {
                 Asteroid a = new Asteroid();
-                a.graphic = asteroid;
+                a.graphic = asteroid_list[i].graphic;
                 a.x = asteroid_list[i].x;
-                a.y = asteroid_list[i].y - asteroid_list[i].speed;
+                a.y = asteroid_list[i].y + asteroid_list[i].speed;
                 a.speed = asteroid_list[i].speed;
                 a.type = asteroid_list[i].type;
                 a.hp = asteroid_list[i].hp;
@@ -257,42 +296,53 @@ namespace Asteroids
                 hp = l3_asteroid_hp;
             }
             int placement_x = rnd.Next(size, 800 - size);
-            Debug.WriteLine(size);
-            Debug.WriteLine(hp);
-            Debug.WriteLine(placement_x);
-            // graphics
-            //System.Drawing.SolidBrush myBrush;
-            //if (hp < 6)
-            //{
-            //    myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
-            //}
-            //else if (hp < 11)
-            //{
-            //    myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Orange);
-            //}
-            //else if (hp < 16)
-            //{
-            //    myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Yellow);
-            //}
-            //else
-            //{
-            //    myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Green);
-            //}
             System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
             System.Drawing.Graphics asteroid;
             asteroid = this.CreateGraphics();
-            asteroid.FillRectangle(myBrush, new Rectangle(100, 600, size, size));
+            asteroid.FillRectangle(myBrush, new Rectangle(placement_x, 0, size, size));
             myBrush.Dispose();
             Asteroid a = new Asteroid();
             a.graphic = asteroid;
             a.x = placement_x;
-            a.y = size;
-            a.speed = rnd.Next(5, 16);
+            a.y = 0;
+            a.speed = rnd.Next(1, 5);
             a.type = type;
             a.hp = hp;
             a.size = size;
             asteroid_list.Add(a);
 
+        }
+
+        private void level_Tick(object sender, EventArgs e)
+        {
+            // decrement spawn time
+            if (spawn_timer.Interval != level_limit)
+            {
+                spawn_timer.Interval = spawn_timer.Interval - level_decrement;
+            }
+        }
+
+        private void countdown_Tick(object sender, EventArgs e)
+        {
+            Debug.WriteLine("COUNTDOWN");
+            // display countdown
+            if (count == -1)
+            {
+                // stop timer
+                countdown_timer.Enabled = false;
+                countdown_timer.Stop();
+                // hide label
+                countdown_label.Hide();
+                countdown_label.Visible = false;
+            }
+            else
+            {
+                countdown_label.Text = count.ToString();
+                countdown_label.Show();
+
+                // decrement count
+                count = count - 1;
+            }
         }
 
     }
