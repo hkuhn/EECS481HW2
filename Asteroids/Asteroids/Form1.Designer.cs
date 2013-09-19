@@ -35,6 +35,8 @@ namespace Asteroids
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameplayForm));
             this.spaceship = new System.Windows.Forms.PictureBox();
+            this.score = new System.Windows.Forms.Label();
+            this.lives = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.spaceship)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,15 +53,45 @@ namespace Asteroids
             this.spaceship.TabIndex = 0;
             this.spaceship.TabStop = false;
             // 
+            // score
+            // 
+            this.score.BackColor = System.Drawing.Color.Transparent;
+            this.score.Font = new System.Drawing.Font("Gill Sans Ultra Bold Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.score.ForeColor = System.Drawing.Color.White;
+            this.score.Location = new System.Drawing.Point(12, 9);
+            this.score.MaximumSize = new System.Drawing.Size(150, 20);
+            this.score.MinimumSize = new System.Drawing.Size(150, 20);
+            this.score.Name = "score";
+            this.score.Size = new System.Drawing.Size(150, 20);
+            this.score.TabIndex = 1;
+            this.score.Text = "Score: 00000";
+            this.score.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lives
+            // 
+            this.lives.AutoSize = true;
+            this.lives.BackColor = System.Drawing.Color.Transparent;
+            this.lives.Font = new System.Drawing.Font("Gill Sans Ultra Bold Condensed", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lives.ForeColor = System.Drawing.Color.White;
+            this.lives.Location = new System.Drawing.Point(622, 11);
+            this.lives.MaximumSize = new System.Drawing.Size(150, 20);
+            this.lives.MinimumSize = new System.Drawing.Size(150, 20);
+            this.lives.Name = "lives";
+            this.lives.Size = new System.Drawing.Size(150, 20);
+            this.lives.TabIndex = 2;
+            this.lives.Text = "Lives: 5";
+            this.lives.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // GameplayForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(782, 755);
+            this.ClientSize = new System.Drawing.Size(784, 762);
+            this.Controls.Add(this.lives);
+            this.Controls.Add(this.score);
             this.Controls.Add(this.spaceship);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(800, 800);
             this.MinimumSize = new System.Drawing.Size(800, 800);
@@ -71,12 +103,15 @@ namespace Asteroids
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Asteroids_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.spaceship)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.PictureBox spaceship;
+        private Label score;
+        private Label lives;
     }
 }
 
