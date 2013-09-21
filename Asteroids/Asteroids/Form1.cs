@@ -35,6 +35,7 @@ namespace Asteroids
     {
         
         // class vars
+        private Boolean GameOver;
         private Boolean MoveLeft, MoveRight, Shooting;
         private static int ship_speed = 12;
         private static int laser_speed = 12;
@@ -47,11 +48,14 @@ namespace Asteroids
         private static int l3_asteroid_hp = 20;
         private static int level_decrement = 500; // 0.5 sec
         private static int level_limit = 3000; // 3 sec
+        private static int point_increment = 5;
         private Timer movement_timer = new Timer();
         private Timer spawn_timer = new Timer();
         private Timer level_timer = new Timer();
         private Timer countdown_timer = new Timer();
         private int count = 9; // init countdown
+        private int numLives = 5;
+        private int points = 0;
 
         private static Random rnd = new Random();
 
@@ -88,6 +92,9 @@ namespace Asteroids
             countdown_timer.Tick += new EventHandler(countdown_Tick);
             countdown_timer.Enabled = true;
             countdown_timer.Start();
+
+            // game over
+            GameOver = false;
 
 
             // paint and buffer
@@ -142,12 +149,12 @@ namespace Asteroids
 
         private void Asteroids_Evaluate()
         {
-            if (MoveLeft)
+            if (MoveLeft && !GameOver)
             {
                 // move left
                 this.spaceship.Location = new Point(this.spaceship.Left - ship_speed, this.spaceship.Top);
             }
-            else if (MoveRight)
+            else if (MoveRight && !GameOver)
             {
                 // move right
                 this.spaceship.Location = new Point(this.spaceship.Left + ship_speed, this.spaceship.Top);
@@ -182,7 +189,7 @@ namespace Asteroids
 
         private void Asteroids_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == ' ' && !Shooting)
+            if (e.KeyChar == ' ' && !Shooting && !GameOver)
             {
                 // shoot
                 Shooting = true;
@@ -271,35 +278,96 @@ namespace Asteroids
             }
 
             // detect collisions
-            // cross reference asteroids
+            // asteroid with ground
             for (int i = 0; i < asteroid_list.Count; i++)
             {
                 Asteroid cur_asteroid = asteroid_list[i];
-                // check x, then y
+
+                // COLLISION WITH SHIP
+                if ((cur_asteroid.y > (800 - cur_asteroid.size - 100)) && (Math.Abs(cur_asteroid.x - spaceship.Location.X) < 50))
+                {
+                    // reduce lives
+                    numLives = 0;
+                    Debug.WriteLine("GAME OVER");
+                    // remove all lasers and asteroids
+                    asteroid_list.Clear();
+                    laser_list.Clear();
+                    // disable timers
+                    movement_timer.Stop();
+                    spawn_timer.Stop();
+                    level_timer.Stop();
+                    movement_timer.Enabled = false;
+                    spawn_timer.Enabled = false;
+                    level_timer.Enabled = false;
+                    // display game over message
+                    countdown_label.Text = "Game Over";
+                    countdown_label.Show();
+                    // set boolean
+                    GameOver = true;
+                    lives.Text = "Lives: 0";
+                }
+
+                // COLLISION WITH FLOOR
+                if (cur_asteroid.y > (800 - cur_asteroid.size))
+                {
+                    // reduce # lives
+                    Debug.WriteLine("LIFE LOST");
+                    numLives--;
+                    String lives_text = "Lives: " + numLives.ToString();
+                    lives.Text = lives_text;
+                    // remove graphic
+                    asteroid_list.RemoveAt(i);
+                    // end game if # lives == 0
+                    if (numLives == 0)
+                    {
+                        Debug.WriteLine("GAME OVER");
+                        // remove all lasers and asteroids
+                        asteroid_list.Clear();
+                        laser_list.Clear();
+                        // disable timers
+                        movement_timer.Stop();
+                        spawn_timer.Stop();
+                        level_timer.Stop();
+                        movement_timer.Enabled = false;
+                        spawn_timer.Enabled = false;
+                        level_timer.Enabled = false;
+                        // display game over message
+                        countdown_label.Text = "Game Over";
+                        countdown_label.Show();
+                        // set boolean
+                        GameOver = true;
+
+                    }
+                }
+
+                // COLLISION WITH LASER
                 for (int j = 0; j < laser_list.Count; j++)
                 {
                     Shot cur_laser = laser_list[j];
-                    if ((Math.Abs(cur_laser.x - cur_asteroid.x) <= 3) && (Math.Abs(cur_laser.y - cur_asteroid.y) <= (cur_asteroid.size / 2)))
+                    if ((Math.Abs(cur_asteroid.y - cur_laser.y) < cur_asteroid.size) && (Math.Abs(cur_asteroid.x - cur_laser.x) < cur_asteroid.size))
                     {
-                        // inflict damage to asteroid
-                        Asteroid a = new Asteroid();
-                        a.graphic = asteroid_list[i].graphic;
-                        a.x = asteroid_list[i].x;
-                        a.y = asteroid_list[i].y;
-                        a.speed = asteroid_list[i].speed;
-                        a.type = asteroid_list[i].type;
-                        a.hp = asteroid_list[i].hp - 1;
-                        a.size = asteroid_list[i].size;
-                        asteroid_list.RemoveAt(i);
-                        if (a.hp != 0)
-                        {
-                            asteroid_list.Insert(i, a);
-                        }
-
+                        // decrement asteroid HP
+                        cur_asteroid.hp = cur_asteroid.hp - 1;
+                        Debug.WriteLine(cur_asteroid.hp);
                         // remove laser
                         laser_list.RemoveAt(j);
+                        // increase points & redo label
+                        points = points + point_increment;
+                        String score_text = "Score: " + points.ToString();
+                        score.Text = score_text;
+                        // reinsert asteroid
+                        if (cur_asteroid.hp != 0)
+                        {
+                            asteroid_list.RemoveAt(i);
+                            asteroid_list.Insert(i, cur_asteroid);
+                        }
+                        else
+                        {
+                            asteroid_list.RemoveAt(i);
+                        }
                     }
                 }
+                    
             }
 
 

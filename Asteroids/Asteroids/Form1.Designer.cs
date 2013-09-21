@@ -89,11 +89,11 @@ namespace Asteroids
             this.countdown_label.BackColor = System.Drawing.Color.Transparent;
             this.countdown_label.Font = new System.Drawing.Font("Gill Sans Ultra Bold Condensed", 100F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.countdown_label.ForeColor = System.Drawing.Color.White;
-            this.countdown_label.Location = new System.Drawing.Point(234, 154);
-            this.countdown_label.MaximumSize = new System.Drawing.Size(300, 300);
-            this.countdown_label.MinimumSize = new System.Drawing.Size(300, 300);
+            this.countdown_label.Location = new System.Drawing.Point(44, 103);
+            this.countdown_label.MaximumSize = new System.Drawing.Size(700, 500);
+            this.countdown_label.MinimumSize = new System.Drawing.Size(700, 500);
             this.countdown_label.Name = "countdown_label";
-            this.countdown_label.Size = new System.Drawing.Size(300, 300);
+            this.countdown_label.Size = new System.Drawing.Size(700, 500);
             this.countdown_label.TabIndex = 3;
             this.countdown_label.Text = "10";
             this.countdown_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
