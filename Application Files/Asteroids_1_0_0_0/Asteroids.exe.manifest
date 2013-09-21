@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="Asteroids.exe" version="1.0.0.0" publicKeyToken="113aeef5a085d6b4" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="Asteroids" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="Asteroids.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Asteroids.exe" size="679424">
+      <assemblyIdentity name="Asteroids" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>9E2atqY+zlSWxsmEKPbjujggaQ9aIBGyATa0v4cLncs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Asteroids.exe.config" size="187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>xm4bo26HQ0LNVwz1vdPYtzhkpMnp2AI5i+f0b+OahTI=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=UMROOT\hkuhn" issuerKeyHash="063ed765b2c2c06c4842c1e8c68b2e7a6e66f3bb" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>REinNFFdmMjLei0PERnrmtrFqv1n24pjjzwZRpr4A1U=</DigestValue></Reference></SignedInfo><SignatureValue>R0IZeBU8jcRGY9fC1CQ4th8v215TnfWdO1R6L9ExH5wV7Pajm1hr4LsF7YJFkzC/rGp0ZPvjnxdeA5q+bYjV9+6Ye17zbSeXSTWLeEWsc91fIPun1VZdkSAhZrm+6dqI4k/+MPFheY+Q/RB+N4nVZTjEodj8e9HJGOOger7baUU=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>t3fHy1fPQAbueJjJVVB9jA1KQ0hoCUgV3cZ+o+4R0LQadnts8yMSjL6FFMuAFWnmDIvgjg5jp0Q3BQ2UF9Y2kQaUdPwnwdGpg/QOdyyCC1mPMhc7qbWd2CV9UqLGyN0GKh1kRfET8koNHSwtVsMX7Pll6HlyrPqjW8BqelKHvHs=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="5503f89a46193c8f638adb67fdaac5da9aeb19110f2d7acbc8985d5134a74844" Description="" Url=""><as:assemblyIdentity name="Asteroids.exe" version="1.0.0.0" publicKeyToken="113aeef5a085d6b4" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=UMROOT\hkuhn</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>YTaAeSUs/5EIqpi9BnTefMznwE6urDG3cVT5FOc7LoY=</DigestValue></Reference></SignedInfo><SignatureValue>mowRSZkdjGOJmuTfxrdw96T/VvGB2GuGzmCRnNiPN0AO09WR2H84mCbVDjc79qVprgy4H6rxd2ZjgedtHnElmAC6BRYrOIZSow7KgKSnsJYsHQvTvIUZxgU8HdO0oAikYV5RmKXgoW6Kav3db4ZnyT9B7CI+/1De8kU/hW2WXMM=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>t3fHy1fPQAbueJjJVVB9jA1KQ0hoCUgV3cZ+o+4R0LQadnts8yMSjL6FFMuAFWnmDIvgjg5jp0Q3BQ2UF9Y2kQaUdPwnwdGpg/QOdyyCC1mPMhc7qbWd2CV9UqLGyN0GKh1kRfET8koNHSwtVsMX7Pll6HlyrPqjW8BqelKHvHs=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIByTCCATKgAwIBAgIQP5zbG12IZ7JOuNdwSc/3qDANBgkqhkiG9w0BAQsFADAjMSEwHwYDVQQDHhgAVQBNAFIATwBPAFQAXABoAGsAdQBoAG4wHhcNMTMwOTIxMjAxMzQ0WhcNMTQwOTIyMDIxMzQ0WjAjMSEwHwYDVQQDHhgAVQBNAFIATwBPAFQAXABoAGsAdQBoAG4wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALd3x8tXz0AG7niYyVVQfYwNSkNIaAlIFd3GfqPuEdC0GnZ7bPMjEoy+hRTLgBVp5gyL4I4OY6dENwUNlBfWNpEGlHT8J8HRqYP0DncsggtZjzIXO6m1ndglfVKixsjdBiodZEXxE/JKDR0sLVbDF+z5Zeh5cqz6o1vAanpSh7x7AgMBAAEwDQYJKoZIhvcNAQELBQADgYEAHTAZB8YW9vzhvWmCxCo6gRtMnV2cKlfUArtCm2Ajkx3LxmnOmJ8HzAs7FS1PqRjUYwRSFT7OzfgyjqXdRc3xwmOL74Dy6iA+e/kCWB6ntmLgtmx9WspTw1vYP2JUFpEcbrE7uhVt6r/GnJgMaPPOrpfbT7RGVHW0yJDUEqa2HyE=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
